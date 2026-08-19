@@ -5970,39 +5970,42 @@ section {
 }
 
 /* ======== Desktop >=1024px redesign: stories（社員故事列表） ======== */
-/* 依 Desktop-o_各社員 1.png（1920 設計）：照片 860x489 左緣 x235、
-   文字欄 x1257（圖文距 162）、卡片間距 170、首卡 y678（header 100 → 上內距 578）。
-   箭頭膠囊 175x65 疊在照片右下（距照片右緣 47、下緣 26）。 */
+/* 依 Desktop-o_各社員 1.png（1920 設計）：照片 860x489、圖文距 162、卡片間距 170、
+   文字欄／箭頭膠囊 175x65（距照片右緣 47、下緣 26）。
+   尺寸一律寫成「設計值 x --u」：--u 為每個斷點的縮放單位（1920 時 1px＝設計原尺寸），
+   卡片區塊以 --pad 水平置中（不足時退回設計左緣 235）。 */
 @media (min-width: 1024px) {
     .members-stories {
-        padding: min(30.1042vw, 578px) 0 min(15.9896vw, 307px); /* 578 / 307 */
+        --u: 0.477px;                       /* 照片 410 */
+        padding: 240px 0 calc(307 * var(--u));
     }
 
     .members-list {
-        gap: min(8.8542vw, 170px); /* 170 */
+        gap: calc(170 * var(--u));
     }
 
     .members-card {
+        --pad: max(calc(235 * var(--u)), calc((100% - 1410 * var(--u)) / 2));
         position: relative;
         flex-direction: row;
         align-items: flex-start;
-        gap: min(8.4375vw, 162px);           /* 圖右緣→文字 162 */
-        padding-left: min(12.2396vw, 235px); /* 235 */
+        gap: calc(162 * var(--u));
+        padding-left: var(--pad);
     }
 
-    /* 箭頭膠囊：疊在照片右下角（左緣 235+860-47-175=873、上緣 489-65-26=398） */
+    /* 箭頭膠囊：疊在照片右下角（照片左緣 + 860-47-175=638、上緣 489-65-26=398） */
     .members-card__arrow {
         display: block;
         position: absolute;
-        top: min(20.7292vw, 398px);
-        left: min(45.4688vw, 873px);
-        width: min(9.1146vw, 175px);
-        height: min(3.3854vw, 65px);
+        top: calc(398 * var(--u));
+        left: calc(var(--pad) + 638 * var(--u));
+        width: calc(175 * var(--u));
+        height: calc(65 * var(--u));
         background-color: var(--color-secondary);
         background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 80 22'%3E%3Cpath d='M0 8.9h62v4.2H0z' fill='%23fff'/%3E%3Cpath d='M52 0 80 11 54 22 61 11Z' fill='%23fff'/%3E%3C/svg%3E");
         background-repeat: no-repeat;
         background-position: center;
-        background-size: min(6.1458vw, 118px) min(1.6927vw, 32.5px);
+        background-size: calc(118 * var(--u)) calc(32.5 * var(--u));
         border-radius: 999px;
         transition: opacity 0.3s ease;
     }
@@ -6016,47 +6019,74 @@ section {
     }
 
     .members-card__photo {
-        width: min(44.7917vw, 860px); /* 860 */
+        width: calc(860 * var(--u));
         height: auto;
         aspect-ratio: 860 / 489;
     }
 
     .members-card__role {
-        font-size: min(1.6667vw, 32px);     /* 32 */
+        font-size: calc(32 * var(--u));
         font-weight: 500;
         line-height: 1;
-        margin-bottom: min(0.7813vw, 15px); /* 15 */
+        margin-bottom: calc(15 * var(--u));
     }
 
     .members-card__name {
-        font-size: min(2.5vw, 48px);        /* 48 */
+        font-size: calc(48 * var(--u));
         font-weight: 500;
         line-height: 1;
-        margin-bottom: min(2.7083vw, 52px); /* 52 */
+        margin-bottom: calc(52 * var(--u));
     }
 
     .members-card__badge {
         display: inline-flex;
         align-items: center;
         justify-content: center;
-        width: min(7.0833vw, 136px);        /* 136 */
-        height: min(2.7083vw, 52px);        /* 52 */
+        width: calc(136 * var(--u));
+        height: calc(52 * var(--u));
         padding: 0;
-        font-size: min(1.7708vw, 34px);     /* 34 */
+        font-size: calc(34 * var(--u));
         font-weight: 500;
         letter-spacing: 0.04em;
-        margin-bottom: min(0.5208vw, 10px); /* 10 */
+        margin-bottom: calc(10 * var(--u));
     }
 
     .members-career__item {
-        font-size: min(1.875vw, 36px);  /* 36 */
+        font-size: calc(36 * var(--u));
         font-weight: 400;
-        line-height: min(2.5vw, 48px);  /* 48 */
+        line-height: calc(48 * var(--u));
     }
 
     .members-career__date {
-        width: min(7.3958vw, 142px);        /* 142 */
-        margin-right: min(1.25vw, 24px);    /* 24 */
+        width: calc(142 * var(--u));
+        margin-right: calc(24 * var(--u));
+    }
+}
+
+/* 各桌機斷點只調縮放單位與首卡上方留白 */
+@media (min-width: 1280px) {
+    .members-stories {
+        --u: 0.595px;                       /* 照片 512 */
+        padding-top: 280px;
+    }
+}
+
+@media (min-width: 1536px) {
+    .members-stories {
+        --u: 0.714px;                       /* 照片 614 */
+        padding-top: 340px;
+    }
+}
+
+@media (min-width: 1920px) {
+    .members-stories {
+        --u: 1px;                           /* 照片 860（設計原尺寸） */
+        padding-top: 578px;
+    }
+
+    /* 1920 以上回到設計稿左緣 235（右側留白 275） */
+    .members-card {
+        --pad: calc(235 * var(--u));
     }
 }
 
