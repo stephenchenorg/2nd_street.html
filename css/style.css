@@ -6023,11 +6023,20 @@ section {
         background-position: center;
         background-size: calc(118 * var(--u)) calc(32.5 * var(--u));
         border-radius: 999px;
-        transition: opacity 0.3s ease;
+        transition: background-color 0.3s ease, box-shadow 0.3s ease;
     }
 
-    .members-card__arrow:hover {
-        opacity: 0.8;
+    /* 游標移到箭頭上時，照片維持放大（箭頭是照片的兄弟節點，需由卡片層判斷） */
+    .members-card:has(.members-card__arrow:hover) .members-card__photo {
+        transform: scale(1.05);
+    }
+
+    /* hover：白底 + 紅箭頭（同首頁 view more）；滑到照片上也一起亮起 */
+    .members-card__arrow:hover,
+    .members-card__photo-link:hover ~ .members-card__arrow {
+        background-color: #FFFFFF;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 80 22'%3E%3Cpath d='M0 8.9h62v4.2H0z' fill='%23E00D12'/%3E%3Cpath d='M52 0 80 11 54 22 61 11Z' fill='%23E00D12'/%3E%3C/svg%3E");
+        box-shadow: var(--shadow-md);
     }
 
     .members-card__photo-link {
