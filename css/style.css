@@ -6091,7 +6091,14 @@ section {
 }
 
 /* ======== Desktop >=1024px redesign: job-intro（職缺介紹） ======== */
+/* 尺寸一律寫成「1920 設計值 x --u」，各斷點只調 --u 與首屏上方留白（同 stories 作法）。
+   紅色卡片維持 86.8vw 流動寬度（版面容器），僅內容隨 --u 縮放。 */
 @media (min-width: 1024px) {
+    .job-benefits,
+    .job-detail {
+        --u: 0.55px;
+    }
+
     /* ---- 版面容器：本頁兩區塊需要 1920 全幅，解除 .container 限寬 ---- */
     .job-benefits .container,
     .job-detail .container {
@@ -6104,11 +6111,11 @@ section {
        全員工享有福利
        ---------------------------------------- */
     .job-benefits {
-        padding: min(21.9271vw, 421px) 0 0;
+        padding: 200px 0 0;
     }
 
     .job-benefits .section-title {
-        font-size: min(3.125vw, 60px);
+        font-size: calc(60 * var(--u));
         line-height: 1.2;
         font-weight: 700;
         color: var(--color-ink);
@@ -6118,36 +6125,36 @@ section {
     .job-benefits__grid {
         justify-content: center;
         align-items: flex-start;
-        gap: min(5.8333vw, 112px);
-        margin-top: min(5.6771vw, 109px);
+        gap: calc(112 * var(--u));
+        margin-top: calc(109 * var(--u));
     }
 
     .job-benefit {
-        width: min(20.8333vw, 400px);
+        width: calc(400 * var(--u));
         max-width: none;
     }
 
     .job-benefit__icon {
-        width: min(12.5vw, 240px);
-        height: min(12.5vw, 240px);
-        margin: 0 auto min(3.6458vw, 70px);
+        width: calc(240 * var(--u));
+        height: calc(240 * var(--u));
+        margin: 0 auto calc(70 * var(--u));
     }
 
     .job-benefit__title {
-        font-size: min(2.0833vw, 40px);
+        font-size: calc(40 * var(--u));
         font-weight: 700;
         line-height: 1;
-        padding-bottom: min(1.25vw, 24px);
-        margin-bottom: min(1.4583vw, 28px);
+        padding-bottom: calc(24 * var(--u));
+        margin-bottom: calc(28 * var(--u));
     }
 
     .job-benefit__title::after {
-        width: min(10.7292vw, 206px);
-        height: min(0.2604vw, 5px);
+        width: calc(206 * var(--u));
+        height: calc(5 * var(--u));
     }
 
     .job-benefit__desc {
-        font-size: min(1.5625vw, 30px);
+        font-size: calc(30 * var(--u));
         font-weight: 400;
         line-height: 1.6;
         color: var(--color-ink);
@@ -6158,7 +6165,7 @@ section {
        設計稿：卡片 1667 寬、頁籤高出卡片頂 126（選中）／83（未選中）
        ---------------------------------------- */
     .job-detail {
-        padding: min(16.875vw, 324px) 0 min(11.7708vw, 226px);
+        padding: calc(324 * var(--u)) 0 calc(226 * var(--u));
     }
 
     .job-detail__card {
@@ -6167,8 +6174,8 @@ section {
         max-width: none;
         margin: 0 auto;
         background-color: var(--color-secondary);
-        border-radius: min(2.2917vw, 44px);
-        padding: 0 min(2.3438vw, 45px) min(2.8125vw, 54px);
+        border-radius: calc(44 * var(--u));
+        padding: 0 calc(45 * var(--u)) calc(54 * var(--u));
         display: flow-root; /* 阻止頁籤負邊距與卡片 margin collapse，讓頁籤凸出卡頂 */
     }
 
@@ -6176,31 +6183,31 @@ section {
     .job-tabs {
         display: flex;
         align-items: flex-end;
-        gap: min(0.7292vw, 14px);
-        height: min(9.6875vw, 186px);
+        gap: calc(14 * var(--u));
+        height: calc(186 * var(--u));
         padding: 0;
-        margin: calc(-1 * min(6.5625vw, 126px)) calc(-1 * min(2.3438vw, 45px)) 0;
+        margin: calc(-1 * (126 * var(--u))) calc(-1 * (45 * var(--u))) 0;
     }
 
     .job-tabs__tab {
         flex: 1 1 50%;
-        height: min(7.4479vw, 143px);
+        height: calc(143 * var(--u));
         display: flex;
         align-items: flex-start;
         justify-content: center;
-        padding: min(1.5625vw, 30px) min(1.25vw, 24px) 0;
-        font-size: min(2.5vw, 48px);
+        padding: calc(30 * var(--u)) calc(24 * var(--u)) 0;
+        font-size: calc(48 * var(--u));
         font-weight: 700;
         line-height: 1.2;
         color: var(--text-inverse);
         background-color: var(--color-secondary);
-        border-radius: min(2.2917vw, 44px) min(2.2917vw, 44px) 0 0;
+        border-radius: calc(44 * var(--u)) calc(44 * var(--u)) 0 0;
         transition: filter 0.3s ease, height 0.3s ease;
     }
 
     .job-tabs__tab[aria-selected="true"] {
-        height: min(9.6875vw, 186px);
-        padding-top: min(1.5625vw, 30px);
+        height: calc(186 * var(--u));
+        padding-top: calc(30 * var(--u));
     }
 
     .job-tabs__tab:not([aria-selected="true"]):hover {
@@ -6211,40 +6218,75 @@ section {
     .job-panels {
         background-color: var(--bg-primary);
         border: none;
-        border-radius: min(1.5625vw, 30px);
-        padding: min(10.5208vw, 202px) min(7.6042vw, 146px) min(9.8958vw, 190px);
+        border-radius: calc(30 * var(--u));
+        padding: calc(202 * var(--u)) calc(146 * var(--u)) calc(190 * var(--u));
     }
 
     /* 明細表格：左灰標籤 394 寬，行間 5px #CCC 分隔線（含首尾） */
     .job-table__row {
         flex-direction: row;
-        border-bottom: min(0.2604vw, 5px) solid #CCCCCC;
+        border-bottom: calc(5 * var(--u)) solid #CCCCCC;
     }
 
     .job-table__row:first-child {
-        border-top: min(0.2604vw, 5px) solid #CCCCCC;
+        border-top: calc(5 * var(--u)) solid #CCCCCC;
     }
 
     .job-table__term {
-        flex: 0 0 min(20.5208vw, 394px);
-        padding: min(1.25vw, 24px);
-        font-size: min(1.875vw, 36px);
+        flex: 0 0 calc(394 * var(--u));
+        padding: calc(24 * var(--u));
+        font-size: calc(36 * var(--u));
         font-weight: 700;
     }
 
     .job-table__desc {
         flex: 1 1 auto;
-        padding: min(4.2708vw, 82px) min(1.5625vw, 30px) min(4.2708vw, 82px) min(3.5938vw, 69px);
-        font-size: min(1.25vw, 24px);
+        padding: calc(82 * var(--u)) calc(30 * var(--u)) calc(82 * var(--u)) calc(69 * var(--u));
+        font-size: max(15px, calc(24 * var(--u)));   /* 小螢幕不低於 15px */
         font-weight: 500;
-        line-height: min(2.5vw, 48px);
+        line-height: max(28px, calc(48 * var(--u)));
     }
 
     /* ○ 提供標記 */
     .job-table__mark {
-        width: min(1.9792vw, 38px);
-        height: min(1.9792vw, 38px);
-        border-width: min(0.2083vw, 4px);
+        width: calc(38 * var(--u));
+        height: calc(38 * var(--u));
+        border-width: calc(4 * var(--u));
+    }
+}
+
+
+/* 各桌機斷點只調縮放單位與首屏上方留白 */
+@media (min-width: 1280px) {
+    .job-benefits,
+    .job-detail {
+        --u: 0.65px;
+    }
+
+    .job-benefits {
+        padding-top: 240px;
+    }
+}
+
+@media (min-width: 1536px) {
+    .job-benefits,
+    .job-detail {
+        --u: 0.75px;
+    }
+
+    .job-benefits {
+        padding-top: 300px;
+    }
+}
+
+@media (min-width: 1920px) {
+    .job-benefits,
+    .job-detail {
+        --u: 1px;
+    }
+
+    .job-benefits {
+        padding-top: 421px;                 /* 設計原值 */
     }
 }
 
