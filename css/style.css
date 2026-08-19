@@ -5971,11 +5971,11 @@ section {
 
 /* ======== Desktop >=1024px redesign: stories（社員故事列表） ======== */
 /* 依 Desktop-o_各社員 1.png（1920 設計）：照片 860x489 左緣 x235、
-   文字欄 x1257（圖文距 162）、卡片間距 170、首卡 y678（header 152 → 上內距 526）。
-   設計稿無箭頭 → .members-card__arrow 沿用既有桌機 display:none，不另處理。 */
+   文字欄 x1257（圖文距 162）、卡片間距 170、首卡 y678（header 100 → 上內距 578）。
+   箭頭膠囊 175x65 疊在照片右下（距照片右緣 47、下緣 26）。 */
 @media (min-width: 1024px) {
     .members-stories {
-        padding: min(27.3958vw, 526px) 0 min(15.9896vw, 307px); /* 526 / 307 */
+        padding: min(30.1042vw, 578px) 0 min(15.9896vw, 307px); /* 578 / 307 */
     }
 
     .members-list {
@@ -5983,10 +5983,32 @@ section {
     }
 
     .members-card {
+        position: relative;
         flex-direction: row;
         align-items: flex-start;
         gap: min(8.4375vw, 162px);           /* 圖右緣→文字 162 */
         padding-left: min(12.2396vw, 235px); /* 235 */
+    }
+
+    /* 箭頭膠囊：疊在照片右下角（左緣 235+860-47-175=873、上緣 489-65-26=398） */
+    .members-card__arrow {
+        display: block;
+        position: absolute;
+        top: min(20.7292vw, 398px);
+        left: min(45.4688vw, 873px);
+        width: min(9.1146vw, 175px);
+        height: min(3.3854vw, 65px);
+        background-color: var(--color-secondary);
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 80 22'%3E%3Cpath d='M0 8.9h62v4.2H0z' fill='%23fff'/%3E%3Cpath d='M52 0 80 11 54 22 61 11Z' fill='%23fff'/%3E%3C/svg%3E");
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: min(6.1458vw, 118px) min(1.6927vw, 32.5px);
+        border-radius: 999px;
+        transition: opacity 0.3s ease;
+    }
+
+    .members-card__arrow:hover {
+        opacity: 0.8;
     }
 
     .members-card__photo-link {
