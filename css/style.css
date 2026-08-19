@@ -4321,20 +4321,23 @@ section {
         aspect-ratio: 700 / 427;
     }
 
-    /* ---- 覆蓋卡片：貼齊照片左下（左 52、距照片底 38） ---- */
+    /* ---- 覆蓋卡片：貼齊照片左下（左 52、距照片底 38） ----
+       單欄 grid：欄寬取兩個框的最大內容寬，姓名框與 career 框因此等寬 */
     .story-hero__card {
         position: absolute;
         left: 52px;
         bottom: 38px;
         z-index: 2;
+        display: grid;
+        width: fit-content;
         max-width: none;
         margin: 0;
         padding: 0;
     }
 
-    /* 紅色姓名框（寬度隨內容） */
+    /* 紅色姓名框（與 career 框同寬，由 grid 欄寬決定） */
     .story-hero__namebox {
-        width: fit-content;
+        width: auto;
         padding: 12px 20px;
     }
 
@@ -4351,9 +4354,9 @@ section {
         margin-top: 4px;
     }
 
-    /* 白色 career 框（緊貼姓名框下緣、寬度隨內容） */
+    /* 白色 career 框（緊貼姓名框下緣、與姓名框同寬） */
     .story-hero__careerbox {
-        width: fit-content;
+        width: auto;
         border: none;
         margin-top: 0;
         padding: 10px 14px 13px 12px;
