@@ -340,7 +340,7 @@ ol {
     }
 
     .nav-link {
-        font-size: min(0.9583vw, 18.4px);
+        font-size: min(1.1458vw, 22px);
         font-weight: 500;
         white-space: nowrap;
         letter-spacing: 0;
