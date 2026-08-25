@@ -1207,13 +1207,10 @@ section {
     border-radius: var(--radius-lg);
     box-shadow: var(--shadow-sm);
     overflow: hidden;
-    transition: all var(--transition-base);
 }
 
-.card:hover {
-    transform: translateY(-4px);
-    box-shadow: var(--shadow-lg);
-}
+/* hover 只放大圖片、卡片本體不位移：位移會讓命中框從指標下移開，
+   在卡片邊緣造成 hover/unhover 來回震盪（圖片忽大忽小） */
 
 .card-image {
     width: 100%;
