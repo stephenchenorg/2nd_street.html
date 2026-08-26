@@ -364,22 +364,35 @@ function initStaffCarousel() {
     }
 
     // 捲動落定後若停在 clone 區，無縫平移一組寬度（±sw 內容完全相同）
+    const hoverable = window.matchMedia('(hover: hover)')
+    const settle = () => {
+        const sw = setWidth()
+        // 指標停在輪播上時先不平移：平移會把指標底下的卡片換成內容相同的 clone，
+        // :hover 隨之移轉到另一個節點，照片放大動畫整個重播 —— 使用者早已停手，
+        // 看到的就是照片自己忽小忽大。改成等指標離開再補平移；只有真的捲到頭尾
+        // 沒得捲了才當場平移（此時畫面正在動，不會被誤認成閃爍）。
+        const atEdge = grid.scrollLeft < 1 ||
+            grid.scrollLeft > grid.scrollWidth - grid.clientWidth - 1
+        // 觸控裝置點擊後可能殘留 :hover，會讓平移永遠不做 —— 只在真有滑鼠時延後
+        if (hoverable.matches && grid.matches(':hover') && !atEdge) return
+
+        if (grid.scrollLeft < sw) grid.scrollLeft += sw
+        else if (grid.scrollLeft >= 2 * sw) grid.scrollLeft -= sw
+        // ponytail: 平移後位置視覺不變，但接手的 clone 尚未 is-visible。
+        // 暫關過渡、瞬時同步類別，避免接縫處閃現一次重播
+        grid.classList.add('is-jumping')
+        syncVisibility()
+        void grid.offsetWidth // 強制 reflow 讓瞬時狀態生效
+        grid.classList.remove('is-jumping')
+    }
+
     let timer
     grid.addEventListener('scroll', () => {
         onScroll()
         clearTimeout(timer)
-        timer = setTimeout(() => {
-            const sw = setWidth()
-            if (grid.scrollLeft < sw) grid.scrollLeft += sw
-            else if (grid.scrollLeft >= 2 * sw) grid.scrollLeft -= sw
-            // ponytail: 平移後位置視覺不變，但接手的 clone 尚未 is-visible。
-            // 暫關過渡、瞬時同步類別，避免接縫處閃現一次重播
-            grid.classList.add('is-jumping')
-            syncVisibility()
-            void grid.offsetWidth // 強制 reflow 讓瞬時狀態生效
-            grid.classList.remove('is-jumping')
-        }, 150)
+        timer = setTimeout(settle, 150)
     })
+    grid.addEventListener('mouseleave', settle)
 
     carousel.querySelector('.staff-nav--prev').addEventListener('click', () => {
         grid.scrollBy({ left: -step(), behavior: 'smooth' })
