@@ -3530,8 +3530,8 @@ section {
         padding: 30px 0 32px 23px;
     }
 
-    /* 前三項之後有分隔線（社員故事後無） */
-    .nav-menu .nav-link:nth-child(-n+3) {
+    /* 前兩項之後有分隔線（人事評價制度後無） */
+    .nav-menu .nav-link:nth-child(-n+2) {
         border-bottom: 2px solid #b3b3b3;
     }
 
