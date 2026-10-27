@@ -2485,8 +2485,8 @@ section {
 }
 
 /* --- Career track diagram (階梯示意圖 + 標籤) ---
-   三張階梯素材皆為無標籤裁切圖（2x），級別/職稱/年資/引線文字內建；
-   紅色標籤（全職人員／兼職人員）一律以 CSS 疊在左上角，行動版與桌機共用同一組素材。
+   階梯素材為無標籤裁切圖（2x），級別/職稱/年資/引線文字內建；
+   紅色標籤（全職人員）以 CSS 疊在左上角，行動版與桌機共用同一組素材。
    容器上緣＝標籤上緣，padding-top 讓出標籤與圖之間的留白 */
 .eval-track {
     position: relative;
@@ -2506,17 +2506,6 @@ section {
     font-weight: 700;
     line-height: 1;
     white-space: nowrap;
-}
-
-/* --- Caption (single line under a track) --- */
-.eval-caption {
-    text-align: center;
-    padding: var(--spacing-lg) var(--spacing-md);
-    margin: 0;
-    font-size: clamp(18px, min(2vw, 38.4px), 40px);
-    font-weight: 400;
-    line-height: 1.5;
-    color: var(--text-primary);
 }
 
 /* --- Closing lines (灰字，居中) --- */
@@ -3492,8 +3481,7 @@ section {
     }
 
     .daily-category,
-    .eval-store,
-    .eval-headquarter {
+    .eval-store {
         order: 2;
     }
 }
@@ -3727,11 +3715,6 @@ section {
         margin-bottom: 64px;
     }
 
-    /* 本部：標題群到紅標籤留白較大（設計稿 191） */
-    .eval-headquarter .eval-section-header {
-        margin-bottom: 191px;
-    }
-
     .eval-section-header__title {
         font-size: 44px;
     }
@@ -3755,38 +3738,6 @@ section {
     .eval-track--store .eval-track__img {
         width: 623px;
         margin-left: 45px;
-    }
-
-    .eval-track--part {
-        margin-top: 50px;
-        padding-top: 99px;
-    }
-
-    .eval-track--part .eval-track__img {
-        width: 619px;
-        margin-left: 47px;
-    }
-
-    .eval-track--hq {
-        padding-top: 21px;
-    }
-
-    .eval-track--hq .eval-track__img {
-        width: 624px;
-        margin-left: 37px;
-    }
-
-    /* --- 圖下說明（兼職考核說明） --- */
-    .eval-caption {
-        padding: 73px 24px 0;
-        margin: 0;
-        font-size: 20px;
-        line-height: 2.05;
-    }
-
-    /* --- 本部 section --- */
-    .eval-headquarter {
-        padding: 174px 0 0;
     }
 
     /* --- 結語（灰字三行）：下留白讓末行距 footer 頂線 151 --- */
@@ -5307,13 +5258,13 @@ section {
         display: inline;
     }
 
-    .eval-store,
-    .eval-headquarter {
-        padding: 0;
+    /* 下留白：末行底 → footer 頂線（見底部說明） */
+    .eval-store {
+        padding: 0 0 calc(103 * var(--u));
     }
 
     /* ----------------------------------------
-       區塊標題（店鋪／本部 fs56 + 紅色英文副標 fs28）
+       區塊標題（店鋪 fs56 + 紅色英文副標 fs28）
        ---------------------------------------- */
     .eval-section-header__title {
         font-size: calc(56 * var(--u));
@@ -5333,12 +5284,8 @@ section {
         margin-bottom: calc(102 * var(--u));
     }
 
-    .eval-headquarter .eval-section-header {
-        margin-bottom: calc(97 * var(--u));
-    }
-
     /* ----------------------------------------
-       階梯圖軌道：紅色標籤（全職人員／兼職人員）fs38、盒 238x70，左緣 365
+       階梯圖軌道：紅色標籤（全職人員）fs38、盒 238x70，左緣 365
        整組以「1920 設計畫布」等比縮放後置中，內部座標仍為設計值 x --u
        ---------------------------------------- */
     .eval-track {
@@ -5361,43 +5308,6 @@ section {
         margin-left: calc(406.5 * var(--u));
     }
 
-    .eval-track--part {
-        margin-top: calc(355.5 * var(--u));
-        padding-top: calc(178 * var(--u));
-    }
-
-    .eval-track--part .eval-track__img {
-        width: calc(1190 * var(--u));
-        margin-left: calc(365 * var(--u));
-    }
-
-    .eval-track--hq {
-        padding-top: calc(193.5 * var(--u));
-    }
-
-    .eval-track--hq .eval-track__img {
-        width: calc(1154 * var(--u));
-        margin-left: calc(403 * var(--u));
-    }
-
-    /* ----------------------------------------
-       兼職圖下說明（2 行 fs32/行距49）
-       ---------------------------------------- */
-    .eval-caption {
-        margin: calc(142 * var(--u)) 0 0;
-        padding: 0 var(--spacing-md);
-        font-size: calc(32 * var(--u));
-        line-height: 1.55;
-    }
-
-    /* ----------------------------------------
-       本部區塊：說明文字 → 標題間距 405
-       ---------------------------------------- */
-    .eval-headquarter {
-        padding-top: calc(405 * var(--u));
-        padding-bottom: calc(103 * var(--u));
-    }
-
     /* ----------------------------------------
        底部說明 3 行（fs32/行距48 灰字）＋ TOP 回頂連結
        （末行底 → footer 頂線 327 = 180 + TOP 44 + 103）
@@ -5413,8 +5323,8 @@ section {
         color: #4D4D4D;
     }
 
-    /* TOP 樣式沿用首頁 .back-to-top，覆寫上邊距 */
-    .eval-headquarter .back-to-top {
+    /* TOP 樣式沿用共用 .back-to-top，覆寫上邊距 */
+    .eval-store .back-to-top {
         margin-top: calc(180 * var(--u));
     }
 }
