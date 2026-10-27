@@ -96,7 +96,7 @@ function initActiveNav() {
 }
 
 // ========================================
-// 4. 職缺介紹 - 正職／兼職頁籤切換
+// 4. 職缺介紹 - 全職／半全職頁籤切換
 // ========================================
 function initJobIntroTabs() {
     const tablist = document.querySelector('.job-tabs')
