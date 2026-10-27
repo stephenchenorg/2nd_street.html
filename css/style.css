@@ -445,7 +445,7 @@ ol {
 }
 
 /* ========================================
-   行動版：footer 上方 TOP 連結 + 右下常駐 104 應徵鈕
+   行動版：footer 上方 TOP 連結 + 右下常駐應徵鈕
    （僅 <=1023px；數值為 手機版w700 設計稿 px，body zoom 等比縮放）
    桌機的 TOP：頁面內有 .back-to-top 的沿用之，沒有的改用這顆（見文末桌機規則）
    ======================================== */
@@ -487,7 +487,7 @@ ol {
         transform: rotate(-45deg);
     }
 
-    /* 104 應徵：右下常駐紅色圓鈕 130，距右 10、距底 20 */
+    /* 應徵：右下常駐紅色圓鈕 130，距右 10、距底 20，僅顯示 Entry */
     .entry-fab {
         position: fixed;
         right: 10px;
@@ -505,15 +505,7 @@ ol {
         line-height: 1;
     }
 
-    .entry-fab__ch {
-        padding-bottom: 6px;
-        border-bottom: 2px solid currentColor;
-        font-size: 22px;
-        font-weight: 700;
-    }
-
     .entry-fab__en {
-        margin-top: 8px;
         font-size: 20px;
         font-style: italic;
     }
