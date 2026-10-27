@@ -475,7 +475,7 @@ function initHeroPin() {
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
 
     // hero 疊字原本錨定 main 頂端，桌機時移入釘選容器內，與圖片一起固定、淡出
-    // （index 是標題＋副標同一區塊 .daily-vision--index；daily／eval 是只含標題的 .hero-copy）
+    // （index 是 .daily-vision--index；daily／eval 是 .hero-copy；皆只含標題）
     const overlay = document.querySelector('main > .hero-copy, main > .daily-vision--index')
     if (overlay && window.innerWidth >= 1024) pin.appendChild(overlay)
 

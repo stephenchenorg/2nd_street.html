@@ -1059,31 +1059,6 @@ section {
     color: var(--color-secondary);
 }
 
-/* ========================================
-   Recruitment Highlight Section
-   ======================================== */
-/* 僅行動版顯示；桌機版已依 0729 設計稿移除（見 redesign 區塊 display:none） */
-.recruitment-highlight {
-    text-align: center;
-}
-
-.highlight-content {
-    max-width: 800px;
-    margin: 0 auto;
-}
-
-@media (min-width: 1024px) {
-    .highlight-content {
-        max-width: 1289px;
-    }
-}
-
-.highlight-content p {
-    font-size: var(--font-size-lg);
-    line-height: 1.8;
-    margin-bottom: var(--spacing-lg);
-}
-
 .btn-lg {
     padding: 16px 48px;
     font-size: var(--font-size-lg);
@@ -1601,47 +1576,11 @@ section {
     100%  { clip-path: inset(100% 0 0 0); }   /* 等待 1s 後重複 */
 }
 
-/* 首頁 Hero 疊字（標題／副標）與社員故事 TOP 連結：
+/* 首頁 Hero 疊字（標題）與社員故事 TOP 連結：
    行動版不顯示（維持既有版面），桌機版於 redesign 區塊開啟 */
 .daily-vision--index,
 .back-to-top {
     display: none;
-}
-
-/* Recruitment Highlight Box (白底紅框，紅字置中) */
-.highlight-box {
-    display: inline-block;
-    padding: 12px 32px;
-    border: 2px solid var(--color-secondary);
-    background: var(--bg-primary);
-    margin-bottom: var(--spacing-md);
-}
-
-.highlight-title {
-    font-size: var(--font-size-lg);
-    font-weight: 700;
-    color: var(--color-secondary);
-    margin: 0;
-}
-
-@media (min-width: 768px) {
-    .highlight-title {
-        font-size: var(--font-size-xl);
-    }
-}
-
-.highlight-heading {
-    font-size: var(--font-size-xl);
-    font-weight: 700;
-    color: var(--color-secondary);
-    margin: 0 0 var(--spacing-md) 0;
-    text-align: center;
-}
-
-@media (min-width: 768px) {
-    .highlight-heading {
-        font-size: var(--font-size-xl);
-    }
 }
 
 .highlight-line {
@@ -1649,14 +1588,6 @@ section {
     height: 100px;
     background-color: var(--color-secondary);
     margin: var(--spacing-xl) auto;
-}
-
-/* Divider below the whole vision tagline group (Figma node 2442:9446) */
-.highlight-divider {
-    width: 1px;
-    height: 100px;
-    margin: var(--spacing-xl) auto 0;
-    background-color: var(--color-secondary);
 }
 
 /* ========================================
@@ -4504,46 +4435,6 @@ section {
     }
 
     /* ----------------------------------------
-       Recruitment Highlight（2030年 百店規模）
-       ---------------------------------------- */
-    .recruitment-highlight {
-        padding: 84px 0 0;
-        margin: 0;
-    }
-
-    .highlight-box {
-        width: 515px;
-        max-width: calc(100% - 48px);
-        padding: 17px 0;
-        border-width: 3px;
-        margin-bottom: 0;
-    }
-
-    .highlight-title {
-        font-size: 43px;
-        font-weight: 700;
-        line-height: 1;
-        letter-spacing: 2px;
-    }
-
-    .highlight-content {
-        max-width: none;
-    }
-
-    .highlight-heading {
-        font-size: 43px;
-        font-weight: 700;
-        line-height: 66px;
-        margin: 60px 0 0;
-    }
-
-    .highlight-divider {
-        width: 2px;
-        height: 135px;
-        margin: 68px auto 0;
-    }
-
-    /* ----------------------------------------
        About Section（絕對定位拼貼，設計高 1620）
        sign: x197 y1344 438x262
        shoes: x34 y1376 310x522
@@ -5167,12 +5058,6 @@ section {
         margin-top: min(1.0938vw, 21px);
         width: 2px;
         height: min(3.9583vw, 76px);
-    }
-
-    /* ---------- 紅框標語區 ---------- */
-    /* 0729 設計稿已移除本區（標語移入 hero 疊層），桌機隱藏、行動版維持原樣 */
-    .recruitment-highlight {
-        display: none;
     }
 
     /* ---------- 關於我們理想中的夥伴（拼貼） ---------- */
@@ -6542,8 +6427,8 @@ section {
         transition: none;
     }
 
-    /* index 版疊字：桌機開啟（行動版由基底規則隱藏，訊息由紅框標語區呈現）。
-       本頁維持改版前的做法：標題＋副標同一絕對定位區塊，整塊疊在 hero 圖左下，
+    /* index 版疊字：桌機開啟（行動版由基底規則隱藏）。
+       本頁維持改版前的做法：標題為絕對定位區塊，疊在 hero 圖左下，
        由 JS 移入 .hero-slider 後與圖片一起釘選、分兩段淡出 */
     .daily-vision--index {
         display: block;
@@ -6559,28 +6444,6 @@ section {
     /* 標題非「開頭，不需要 daily 的負縮排 */
     .daily-vision--index .daily-vision__title {
         text-indent: 0;
-    }
-
-    .daily-vision--index .daily-vision__subtitle {
-        position: relative;
-        max-width: none;
-        margin: 0;
-        padding-left: min(1.875vw, 36px);
-        font-size: min(2.0833vw, 40px);
-        font-weight: 500;
-        line-height: 1.43;
-        color: var(--text-inverse);
-    }
-
-    /* 副標左側紅色豎線 */
-    .daily-vision--index .daily-vision__subtitle::before {
-        content: '';
-        position: absolute;
-        left: 0;
-        top: min(0.52vw, 10px);
-        bottom: min(0.52vw, 10px);
-        width: min(0.47vw, 9px);
-        background-color: var(--color-secondary);
     }
 
     /* 疊字移入釘選容器後貼齊圖左下 */
