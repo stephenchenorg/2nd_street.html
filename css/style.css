@@ -1250,38 +1250,6 @@ section {
 }
 
 /* ========================================
-   Staff Cards Grid
-   ======================================== */
-.staff-cards {
-    display: grid;
-    gap: var(--spacing-lg);
-    grid-template-columns: 1fr;
-}
-
-@media (min-width: 768px) {
-    .staff-cards {
-        grid-template-columns: repeat(2, 1fr);
-        gap: var(--spacing-xl);
-    }
-}
-
-.staff-card {
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-}
-
-.staff-card .card-content {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-}
-
-.staff-card .card-text {
-    flex: 1;
-}
-
-/* ========================================
    Page Title Section
    ======================================== */
 .page-title {
@@ -1576,7 +1544,7 @@ section {
     100%  { clip-path: inset(100% 0 0 0); }   /* 等待 1s 後重複 */
 }
 
-/* 首頁 Hero 疊字（標題）與社員故事 TOP 連結：
+/* 首頁 Hero 疊字（標題）與頁內 TOP 連結（日常業務／人事評價）：
    行動版不顯示（維持既有版面），桌機版於 redesign 區塊開啟 */
 .daily-vision--index,
 .back-to-top {
@@ -2097,144 +2065,6 @@ section {
     font-weight: 700;
     letter-spacing: 2px;
     z-index: 10;
-}
-
-/* Staff Stories Section */
-.staff-stories-section {
-    padding: 289px 0 300px;
-    background-color: #F2F2F2;
-    text-align: center;
-}
-
-.staff-stories-section .highlight-line {
-    height: 180px;
-}
-
-.staff-stories-section .section-title {
-    font-size: clamp(32px, 6.2vw, 60px);
-    font-weight: 700;
-    margin: 0;
-}
-
-.staff-stories-section .section-subtitle {
-    font-size: clamp(18px, 3.2vw, 31px);
-}
-
-.staff-grid {
-    display: grid;
-    gap: var(--spacing-lg);
-    margin: var(--spacing-lg) 0;
-    grid-template-columns: 1fr;
-}
-
-/* ≥1024px：對齊設計稿卡片群組（兩欄同高，整組 1201.7 寬置中，欄距 47px） */
-@media (min-width: 1024px) {
-    .staff-grid {
-        grid-template-columns: repeat(2, 1fr);
-        max-width: 1201px;
-        margin: 158px auto var(--spacing-lg);
-        padding: 0;
-        column-gap: 47px;
-        align-items: start;
-    }
-}
-
-.staff-grid .staff-card {
-    background: transparent;
-    box-shadow: none;
-    border-radius: 0;
-    color: inherit;
-    text-decoration: none;
-}
-
-/* 無限輪播接縫平移時暫關卡片過渡，瞬時同步 is-visible（見 initStaffCarousel） */
-.staff-grid.is-jumping .staff-card {
-    transition: none;
-}
-
-/* 卡片圖：直式 577.3 x 649.2（≈1:1.125） */
-.staff-grid .card-image {
-    aspect-ratio: 577 / 649;
-}
-
-/* 卡片文字：圖下 ~52px，兩行置中 */
-.staff-grid .card-content {
-    padding: var(--spacing-md) 0 0;
-    text-align: center;
-}
-
-.staff-grid .card-title {
-    font-size: 20px;
-    font-weight: 300;
-    color: #4D4D4D;
-    margin-bottom: var(--spacing-xs);
-}
-
-.staff-grid .card-role {
-    font-size: 20px;
-    font-weight: 300;
-    color: #4D4D4D;
-    margin-bottom: 0;
-}
-
-@media (min-width: 768px) {
-    .staff-grid .card-title {
-        font-size: 26px;
-    }
-
-    .staff-grid .card-role {
-        font-size: 26px;
-    }
-}
-
-@media (min-width: 1024px) {
-    .staff-grid .card-title {
-        font-size: 32px;
-    }
-
-    .staff-grid .card-role {
-        font-size: 32px;
-    }
-}
-
-.section-cta {
-    text-align: center;
-    margin-top: var(--spacing-xl);
-}
-
-/* Secondary Button */
-.btn-secondary {
-    display: inline-block;
-    padding: 14px 48px;
-    background-color: var(--bg-accent);
-    color: var(--text-inverse);
-    font-size: var(--font-size-base);
-    font-weight: 700;
-    letter-spacing: 1px;
-    border: none;
-    border-radius: var(--radius-full);
-    cursor: pointer;
-    transition: var(--transition-base);
-}
-
-@media (min-width: 1024px) {
-    .btn-secondary {
-        padding: 28px 90px;
-    }
-
-    /* 社員故事區 view more：目標外觀 298x76、字級 34/weight 400 */
-    .staff-stories-section .btn-secondary {
-        padding: 21px 72px;
-        font-size: 34px;
-        font-weight: 400;
-        line-height: 1;
-    }
-}
-
-.btn-secondary:hover {
-    background-color: #FFFFFF;
-    color: var(--color-secondary);
-    box-shadow: var(--shadow-md);
 }
 
 /* Footer Enhanced Structure */
@@ -4566,9 +4396,10 @@ section {
     /* ----------------------------------------
        深入了解（三張直落大圖，全出血）
        img1: 700x806、img2/3: 700x660，間距 22-26
+       下留白 160 給 footer 頂線上方的 TOP 連結（首頁最後一個區塊）
        ---------------------------------------- */
     .deep-dive-images {
-        padding: 0;
+        padding: 0 0 160px;
     }
 
     .image-single {
@@ -4627,141 +4458,8 @@ section {
         font-weight: 500;
         letter-spacing: 0.02em;
     }
-
-    /* ----------------------------------------
-       社員故事（灰底、單卡橫向滑動）
-       卡圖 508x570、文字 28、鈕 300x78
-       ---------------------------------------- */
-    .staff-stories-section {
-        padding: 158px 0 160px;
-        margin-top: 0;
-    }
-
-    .staff-stories-section .highlight-line {
-        width: 2px;
-        height: 122px;
-        margin: 0 auto;
-    }
-
-    .staff-stories-section .section-title {
-        font-size: 44px;
-        line-height: 1.4;
-        margin: 30px 0 0;
-    }
-
-    .staff-stories-section .section-subtitle {
-        font-size: 20px;
-        font-weight: 700;
-        margin: 8px 0 0;
-    }
-
-    /* 卡片群改為水平滑動輪播（scroll-snap）；gap 100 讓鄰卡移出視窗、單卡無 peek（設計稿） */
-    .staff-grid {
-        display: flex;
-        overflow-x: auto;
-        overflow-y: hidden; /* 只允許水平捲動，避免觸控板上下捲 */
-        scroll-snap-type: x mandatory;
-        gap: 100px;
-        margin: 55px -24px 0;
-        padding: 0 96px;
-        scrollbar-width: none;
-        -webkit-overflow-scrolling: touch;
-    }
-
-    .staff-grid::-webkit-scrollbar {
-        display: none;
-    }
-
-    .staff-grid .staff-card {
-        flex: 0 0 508px;
-        width: 508px;
-        scroll-snap-align: center;
-    }
-
-    .staff-grid .card-image {
-        aspect-ratio: 508 / 570;
-    }
-
-    .staff-grid .card-content {
-        padding: 26px 0 0;
-        text-align: center;
-    }
-
-    .staff-grid .card-title {
-        font-size: 28px;
-        font-weight: 400;
-        line-height: 1.6;
-        color: #4D4D4D;
-        margin-bottom: 0;
-    }
-
-    .staff-grid .card-role {
-        font-size: 28px;
-        font-weight: 400;
-        line-height: 1.6;
-        color: #4D4D4D;
-    }
-
-    .section-cta {
-        margin-top: 60px;
-    }
-
-    .staff-stories-section .btn-secondary {
-        width: 195px;
-        height: 50px;
-        padding: 0;
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 30px;
-        font-weight: 500;
-        line-height: 1;
-        border-radius: 39px;
-    }
 }
 
-
-/* ======== 首頁社員故事輪播箭頭（僅行動版顯示） ======== */
-.staff-nav {
-    display: none;
-}
-
-@media (max-width: 1023px) {
-    .staff-carousel {
-        position: relative;
-    }
-
-    /* 紅色圓形箭頭鈕 46px：設計稿距視窗左右 26（container 內縮 24 → 偏移 2） */
-    .staff-nav {
-        position: absolute;
-        top: 317px; /* grid margin-top 55 + 照片 570/2 - 鈕半徑 23 */
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: 46px;
-        height: 46px;
-        padding: 0;
-        border: none;
-        border-radius: 50%;
-        background: var(--color-secondary);
-        color: #fff;
-        cursor: pointer;
-        z-index: 2;
-    }
-
-    .staff-nav--prev {
-        left: 2px;
-    }
-
-    .staff-nav--next {
-        right: 2px;
-    }
-
-    .staff-nav svg {
-        width: 100%;
-        height: 100%;
-    }
-}
 
 /* ======== 行動選單社群連結／stories 箭頭連結（桌機隱藏） ======== */
 @media (min-width: 1024px) {
@@ -4975,7 +4673,7 @@ section {
 
 /* ======== Desktop >=1024px redesign: index.html（首頁） ======== */
 /* 依據設計稿 Desktop-o_TOP 1.png（1920 設計 px，量測值 ÷3）重製
-   Hero／SCROLL 指示／紅框標語／關於我們拼貼／深入了解卡片／社員故事輪播 */
+   Hero／SCROLL 指示／關於我們拼貼／深入了解卡片 */
 @media (min-width: 1024px) {
 
     /* ---------- Hero ---------- */
@@ -5205,11 +4903,12 @@ section {
     }
 
     /* ---------- 深入了解（三張 view more 卡片） ---------- */
-    /* 設計稿：大圖 1920x639；下排兩張 952x640、欄距 16、列距 20；下方留白 21 接灰底 */
+    /* 設計稿：大圖 1920x639；下排兩張 952x640、欄距 16、列距 20；
+       首頁最後一個區塊：下留白比照職缺介紹 226，容納 footer 頂線上方的 TOP 連結 */
     .deep-dive-images {
         width: 100%;
         margin: 0 auto;
-        padding: 0 0 calc(21 * var(--u));
+        padding: 0 0 calc(226 * var(--u));
     }
 
     .image-single {
@@ -5286,149 +4985,7 @@ section {
         border-radius: calc(38.5 * var(--u));
     }
 
-    /* ---------- 社員故事 ---------- */
-    /* 設計稿：灰底 #F2F2F2 y6109-8200；直線 180 @y6477；標題 ink y6709-6765；
-       卡片 y6972 起、寬 503 高 561、欄距 42、群組 1590 置中；圓形箭頭 60 於卡片圖垂直置中 */
-    .staff-stories-section {
-        padding: calc(368 * var(--u)) 0 calc(41.5 * var(--u));
-        background-color: #F2F2F2;
-    }
-
-    .staff-stories-section .container {
-        width: 100%;
-        max-width: none;
-        padding: 0;
-    }
-
-    .staff-stories-section .highlight-line {
-        width: 2px;
-        height: calc(180 * var(--u));
-        margin: 0 auto;
-    }
-
-    .staff-stories-section .section-title {
-        font-size: calc(60 * var(--u));
-        line-height: 1.2;
-        color: var(--color-ink);
-        margin: calc(44 * var(--u)) 0 0;
-    }
-
-    .staff-stories-section .section-subtitle {
-        font-size: calc(27 * var(--u));
-        font-weight: 700;
-        color: var(--color-secondary);
-        line-height: 1.2;
-        margin: calc(14 * var(--u)) 0 0;
-    }
-
-    .staff-carousel {
-        position: relative;
-        width: calc(1590 * var(--u));
-        margin: calc(150 * var(--u)) auto 0;
-    }
-
-    /* 4 張卡片顯示 3 張：水平捲動 + snap，箭頭以 JS scrollBy 切換 */
-    .staff-grid {
-        display: flex;
-        gap: calc(42 * var(--u));
-        max-width: none;
-        margin: 0;
-        padding: 0;
-        overflow-x: auto;
-        overflow-y: hidden; /* 只允許水平捲動，避免觸控板上下捲 */
-        scroll-snap-type: x mandatory;
-        scrollbar-width: none;
-    }
-
-    .staff-grid::-webkit-scrollbar {
-        display: none;
-    }
-
-    .staff-grid .staff-card {
-        flex: 0 0 calc((100% - 2 * calc(42 * var(--u))) / 3);
-        scroll-snap-align: center;
-    }
-
-    .staff-grid .card-image {
-        aspect-ratio: 503 / 561;
-    }
-
-    .staff-grid .card-content {
-        padding: calc(41 * var(--u)) 0 0;
-    }
-
-    .staff-grid .card-title {
-        font-size: calc(30 * var(--u));
-        font-weight: 400;
-        line-height: calc(45 * var(--u));
-        color: var(--color-ink);
-        margin: 0;
-    }
-
-    .staff-grid .card-role {
-        font-size: calc(30 * var(--u));
-        font-weight: 400;
-        line-height: calc(45 * var(--u));
-        color: var(--color-ink);
-        margin: 0;
-    }
-
-    /* 紅色圓形左右箭頭鈕（設計稿 60px，位於卡片群組外側 41px、卡片圖垂直置中） */
-    .staff-nav {
-        position: absolute;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        top: calc(calc(561 * var(--u)) / 2);
-        transform: translateY(-50%);
-        width: calc(60 * var(--u));
-        height: calc(60 * var(--u));
-        padding: 0;
-        border: none;
-        border-radius: 50%;
-        background: var(--color-secondary);
-        color: #FFFFFF;
-        cursor: pointer;
-        z-index: 2;
-        transition: opacity 0.3s ease;
-    }
-
-    .staff-nav:hover {
-        opacity: 0.8;
-    }
-
-    .staff-nav--prev {
-        left: calc(-1 * (101 * var(--u)));
-    }
-
-    .staff-nav--next {
-        right: calc(-1 * (101 * var(--u)));
-    }
-
-    .staff-nav svg {
-        width: 100%;
-        height: 100%;
-    }
-
-    /* view more 鈕：225x58 置中（與 image-view-more 一致） */
-    .staff-stories-section .section-cta {
-        margin-top: calc(150 * var(--u));
-    }
-
-    .staff-stories-section .btn-secondary {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        width: calc(225 * var(--u));
-        height: calc(58 * var(--u));
-        padding: 0;
-        font-size: calc(34 * var(--u));
-        font-weight: 500;
-        line-height: 1;
-        border-radius: calc(39 * var(--u));
-    }
-
-    /* TOP 回頂連結：view more 下 ~230、灰 #999、上箭頭＋TOP 字置中 */
+    /* TOP 回頂連結（日常業務／人事評價共用，各頁覆寫上邊距）：灰 #999、上箭頭＋TOP 字置中 */
     .back-to-top {
         display: flex;
         flex-direction: column;

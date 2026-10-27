@@ -255,8 +255,6 @@ function initScrollFadeIn() {
     }, observerOptions)
 
     animatedElements.forEach(element => {
-        // 輪播卡片由 initStaffCarousel 專責（需可重複觸發），略過一次性觀察器
-        if (element.closest('.staff-carousel')) return
         observer.observe(element)
     })
 }
@@ -301,104 +299,6 @@ function initDesktopZoom() {
             apply()
             ticking = false
         })
-    })
-}
-
-// ========================================
-// 9. 首頁社員故事輪播箭頭（行動版 scroll-snap 的左右切換）
-// ========================================
-function initStaffCarousel() {
-    const carousel = document.querySelector('.staff-carousel')
-    if (!carousel) return
-
-    const grid = carousel.querySelector('.staff-grid')
-    const originals = [...grid.children]
-    if (!originals.length) return
-
-    // 前後各補一組 clone，達成無限循環；clone 保留 fade-in-up，
-    // 讓它跟原卡一樣能在從邊緣滑入時重播進入動畫（僅不可聚焦）
-    const clone = (node) => {
-        const c = node.cloneNode(true)
-        c.setAttribute('aria-hidden', 'true')
-        c.setAttribute('tabindex', '-1')
-        return c
-    }
-    originals.forEach(node => grid.append(clone(node)))
-    originals.slice().reverse().forEach(node => grid.prepend(clone(node)))
-
-    const cards = [...grid.children]
-
-    const gap = () => parseFloat(getComputedStyle(grid).gap) || 0
-    const step = () => originals[0].offsetWidth + gap()
-    const setWidth = () => originals.length * step() // 一組寬度
-
-    // 初始定位到中間（原始）組
-    grid.scrollLeft = setWidth()
-
-    // 卡片有 35% 進入 grid 可視範圍（且區塊在視窗內）→ 播進入動畫；
-    // 完全離開即重置 → 下次再從邊緣出現時重播（不論之前有沒有顯示過）
-    let sectionInView = false
-    const REVEAL = 0.35
-    const syncVisibility = () => {
-        const box = grid.getBoundingClientRect()
-        cards.forEach(card => {
-            const r = card.getBoundingClientRect()
-            const shown = Math.min(r.right, box.right) - Math.max(r.left, box.left)
-            const ratio = r.width ? shown / r.width : 0
-            if (sectionInView && ratio >= REVEAL) card.classList.add('is-visible')
-            else if (!sectionInView || shown <= 0) card.classList.remove('is-visible')
-        })
-    }
-
-    // 垂直進出視窗用 IntersectionObserver 判定；水平捲動另由 scroll 事件驅動
-    new IntersectionObserver((entries) => {
-        sectionInView = entries[0].isIntersecting
-        syncVisibility()
-    }, { threshold: 0 }).observe(carousel)
-
-    let ticking = false
-    const onScroll = () => {
-        if (ticking) return
-        ticking = true
-        requestAnimationFrame(() => { syncVisibility(); ticking = false })
-    }
-
-    // 捲動落定後若停在 clone 區，無縫平移一組寬度（±sw 內容完全相同）
-    const hoverable = window.matchMedia('(hover: hover)')
-    const settle = () => {
-        const sw = setWidth()
-        // 指標停在輪播上時先不平移：平移會把指標底下的卡片換成內容相同的 clone，
-        // :hover 隨之移轉到另一個節點，照片放大動畫整個重播 —— 使用者早已停手，
-        // 看到的就是照片自己忽小忽大。改成等指標離開再補平移；只有真的捲到頭尾
-        // 沒得捲了才當場平移（此時畫面正在動，不會被誤認成閃爍）。
-        const atEdge = grid.scrollLeft < 1 ||
-            grid.scrollLeft > grid.scrollWidth - grid.clientWidth - 1
-        // 觸控裝置點擊後可能殘留 :hover，會讓平移永遠不做 —— 只在真有滑鼠時延後
-        if (hoverable.matches && grid.matches(':hover') && !atEdge) return
-
-        if (grid.scrollLeft < sw) grid.scrollLeft += sw
-        else if (grid.scrollLeft >= 2 * sw) grid.scrollLeft -= sw
-        // ponytail: 平移後位置視覺不變，但接手的 clone 尚未 is-visible。
-        // 暫關過渡、瞬時同步類別，避免接縫處閃現一次重播
-        grid.classList.add('is-jumping')
-        syncVisibility()
-        void grid.offsetWidth // 強制 reflow 讓瞬時狀態生效
-        grid.classList.remove('is-jumping')
-    }
-
-    let timer
-    grid.addEventListener('scroll', () => {
-        onScroll()
-        clearTimeout(timer)
-        timer = setTimeout(settle, 150)
-    })
-    grid.addEventListener('mouseleave', settle)
-
-    carousel.querySelector('.staff-nav--prev').addEventListener('click', () => {
-        grid.scrollBy({ left: -step(), behavior: 'smooth' })
-    })
-    carousel.querySelector('.staff-nav--next').addEventListener('click', () => {
-        grid.scrollBy({ left: step(), behavior: 'smooth' })
     })
 }
 
@@ -561,7 +461,6 @@ document.addEventListener('DOMContentLoaded', () => {
     initHeroSlider()
     initScrollFadeIn()
     initDesktopZoom()
-    initStaffCarousel()
     initCollageParallax()
     initHeaderShrink()
     initHeroPin()
